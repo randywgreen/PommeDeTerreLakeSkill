@@ -104,7 +104,7 @@ def get_daily_info(session):
         if "currElevation" in session.get('attributes', {}) :
             #print "***currElevation in session***"
             curr_elevation = session['attributes']['currElevation']
-            speech_output += "The lakes current elavation is " + curr_elevation + " feet. "
+            speech_output += "The lakes current elavation is " + str(int(float(curr_elevation))) + " feet. "
             
         if "lakeLevel" in session.get('attributes', {}) :
             #print "***lakeLevel in session***"
@@ -170,20 +170,26 @@ def get_daily_info(session):
                     session_attributes['currElevation'] = curr_elevation
                 else :
                     session_attributes = create_lake_status_attributes('currElevation', curr_elevation)
-                speech_output = "The lakes current elavation is " + curr_elevation + " feet. "
+                speech_output = "The lakes current elavation is " + str(int(float(curr_elevation))) + " feet. "
                 
                 #Figure out the level
                 diff = float(curr_elevation) - float(normal_elevation)
-                if diff > 0 :
+                if int(diff) > 1 :
                     level = str(int(diff)) + " feet higher "
-                else :
+                elif int(diff) == 1 :
+                    level = str(int(diff)) + " foot higher "
+                elif int(diff) == 0 :
+                    level = str(int(diff)) + " feet higher "
+                elif int(diff) == -1 :
+                    level = str(int(diff)) + " foot lower "
+                elif  int(diff) < -1 :
                     level = str(int(diff)) + " feet lower "
             
                 if any(session_attributes)  :
                     session_attributes['lakeLevel'] = level
                 else :
                     session_attributes = create_lake_status_attributes('lakeLevel', level)
-                speech_output += "This is " + level + "than the normal pool elevation of " + normal_elevation + " feet. "
+                speech_output += "This is " + level + "than the normal pool elevation of " + str(int(float(normal_elevation))) + " feet. "
                 
             if discharge_rate :
                 if any(session_attributes) :
