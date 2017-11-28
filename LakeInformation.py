@@ -1,3 +1,4 @@
+# Author: Randy Green
 import urllib2
 import json
 from HTMLParser import HTMLParser
