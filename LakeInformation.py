@@ -1,4 +1,6 @@
 # Author: Randy Green
+# Description:  This script is used with the Amazon echo skill to gather lake information
+# located at http://www.nwk.usace.army.mil/Locations/District-Lakes/Pomme-de-Terre-Lake/Daily-Lake-Info-2/
 import urllib2
 import json
 from HTMLParser import HTMLParser
